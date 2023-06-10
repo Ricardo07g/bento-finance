@@ -3,34 +3,15 @@ import "./login.css"
 import WebService from "../../components/webService"
 import React, { useState } from "react"
 import { useForm } from "react-hook-form";
-//import { ErrorMessage } from "@hookform/error-message";
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useNavigate } from "react-router-dom";
-import jwt_decode from "jwt-decode";
-
-async function VerifyAuth()
-{   
-    let session = sessionStorage.getItem("Auth");
-
-    if (typeof session !== "undefined" && session !== null && session != 'null')
-    {   
-        let storage = JSON.parse(sessionStorage.getItem("Auth"))
-        let token_decoded = jwt_decode(storage.token);
-        let today = new Date();
-        let token_exp_date = new Date(token_decoded.exp * 1000);
-
-        if(token_exp_date > today)
-        {
-          return window.location.href = "/home"
-        }
-    }
-}
+import AuthService from "../../components/authService"
 
 export default function  (props) 
 { 
-
-  VerifyAuth()
+  const Auth = new AuthService();
+  Auth.VerifyAuthLoginPage();
 
   const navigate = useNavigate();
   let [exibeLoading,setExibeLoading] = useState(false);

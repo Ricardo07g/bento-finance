@@ -1,46 +1,35 @@
+/* IMPORTS CSS AND JS */
 import "bootstrap/dist/css/bootstrap.min.css"
 import "./home.css"
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+
+/* IMPORTS COMPONENTS*/
 import React, { useState } from "react"
 import WebService from "../../components/webService"
+import AuthService from "../../components/authService"
+import Template from "../../components/templates/template"
 import { useNavigate } from "react-router-dom";
-import jwt_decode from "jwt-decode";
 
-async function VerifyAuth()
-{   
-    let session = sessionStorage.getItem("Auth");
 
-    if (typeof session !== "undefined" && session !== null && session != 'null')
-    {   
-        let storage = JSON.parse(sessionStorage.getItem("Auth"))
-        let token_decoded = jwt_decode(storage.token);
-    
-      if (storage == null)
-      {
-        return window.location.href = "/"
-
-      }else{
-        let today = new Date();
-        let token_exp_date = new Date(token_decoded.exp * 1000);
-
-        if(today > token_exp_date)
-        {
-            sessionStorage.setItem("Auth", null)
-            return window.location.href = "/"
-        }
-      }
-
-    }else{     
-        return window.location.href = "/"
-    }
-}
 
 export default function (props) 
 {   
-    VerifyAuth();
-    
+    const Auth = new AuthService();
+    Auth.VerifyAuth();
+
     return(
-        <>
-            <h1> home </h1>
+        <> 
+        <Template>
+            <Row>
+                <Col>
+                    1 of 1
+                </Col>
+                <Col>
+                    2 of 2
+                </Col>
+            </Row>
+        </Template>
         </>
     );
 }

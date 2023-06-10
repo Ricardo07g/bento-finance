@@ -1,0 +1,9 @@
+.footer-class{
+    color: #212529 !important;
+    background-color: #212529 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 50px !important;
+    bottom: 0 !important;
+    position: fixed !important;
+}
